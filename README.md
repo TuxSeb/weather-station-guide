@@ -1,30 +1,31 @@
-# Raspberry Pi weather station
+# Station Météo à base de Raspberry Pi
 
-The weather station kit is a HAT for the Raspberry Pi which allows it to collect weather data, using a variety of sensors. It's designed for use in schools to enable students to create their own weather station, and has a range of resources to support its use.
+Le Kit de Station Météo est un HAT  ("Hardware Attached on Top") pour Raspberry Pi avec lequel vous pouvez collecter des données météos en utilisants son panel de capteurs. Il a été imaginé pour une utilisation à l'école afin que les élèves puissent crée leur propres station météo et dispose d'une documentation pour sa mise en oeuvre et son utilisation .
 
-As well as logging data locally, schools that received a free weather station can log their data in a central Oracle database, so they can share and collaborate with schools around the world.
-
-
-![Weather Station](images/weather-station-kit.png)
-
-## How to set up your weather station
-
-1. [Put the kit together](hardware-setup.md)
-1. [Set up the software](software-setup.md)
-1. [Install the weather station outside](siting.md)
+En plus de l'enregistrement des données au niveau local, les écoles qui ont reçu une station météo libre peuvent enregistrer leurs données dans la base de données centrale d'Oracle, afin qu'elles puissent partager et collaborer avec des écoles du monde entier.
 
 
-## Exploring the sensors
 
-- [Rain gauge](rain-gauge.md)
-- [Anemometer](anemometer.md)
-- [Wind vane](wind-vane.md)
-- [Temperature probe](temp-probe.md)
+![Station météo](images/weather-station-kit.png)
+
+## Comment créer votre station météo
+
+1. [Montez le kit](hardware-setup.md)
+1. [intallez le logiciel](software-setup.md)
+1. [Mettez la station météo dehors](siting.md)
+
+
+## Explorer les capteurs
+
+- [Pluviomètre](rain-gauge.md)
+- [Anemomètre](anemometer.md)
+- [Girouette](wind-vane.md)
+- [Sonde de Temperature](temp-probe.md)
 
 ## Resources
 
-- [Sensing the weather](https://github.com/raspberrypilearning/sensing-the-weather): a series of cross curricular lessons exploring measuring, collecting and analysing weather data in order to predict the weather.
-- [Weather station web page](https://www.raspberrypi.org/weather-station)
-- Get support--or show off your weather station!--on [our forum](https://www.raspberrypi.org/forums/viewforum.php?f=112).
+- [Prévisions météos](https://github.com/raspberrypilearning/sensing-the-weather): une série de leçons scolaires explorant mesure, la collecte et l'analyse des données météorologiques afin de prévoir le temps.
+- [Page de la station météo](https://www.raspberrypi.org/weather-station)
+- Pour avoir de l'aide --ou nous montrer votre station météo !--on [Notre forum (EN)](https://www.raspberrypi.org/forums/viewforum.php?f=112).
 
 
