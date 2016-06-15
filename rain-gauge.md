@@ -1,42 +1,43 @@
-# The rain gauge
+# Le Pluviomètre
 
-Here is the rain gauge sensor supplied with the Raspberry Pi Weather Station kit:
+Voici le pluviomètre fournis avec le Kit de Station météo pour Rapsberry Pi:
 
-![Rain Gauge](images/rain_gauge.jpg)
+![Pluviomètre](images/rain_gauge.jpg)
 
-## How does it work?
+## Comment ça fonctionne ?
 
-We can explore the rain gauge and see how it works by removing the bucket. Gently squeeze the clips on either side; the lid should then pop off.
+Nous pouvons explorer le pluviomètre et son fonctionnement en enlevant le seau , pour cela il faut presser les clips sur le coté, le couvercle devrait alors s'enlever.
 
 ![](images/rain_gauge_open.jpg)
 
-This rain gauge is basically a self-emptying tipping bucket. Rain is collected and channelled into the bucket. Once enough rainwater has been collected the bucket will tip over, the water will drain out from the base, and the opposite bucket will come up into position.
+Cette jauge de pluie est basiquement un reservoir basculant à vidage automatique. La pluie est colléctée et est acheminée dans le seau. Une fois que l'eau de pluie à été collecté, le seau va basculer, et l'eau va être drainée en dehors de la base, et le réservoir opposé va monter en position
 
-The product [datasheet](https://www.argentdata.com/files/80422_datasheet.pdf) tells us that 0.2794 mm of rain will tip the bucket. We can multiply this by the number of tips to calculate the amount of rainfall.
+Le produit [datasheet](https://www.argentdata.com/files/80422_datasheet.pdf) nous dit que 0.2794 mm de pluies feront pencher le seau. Nous pouvons alors multiplier cela par le nombre de basculement pour calculer the montant de la chutte de pluie.
 
-If you look at the RJ11 plug on the end of the wire attached to the rain gauge, you'll see there are only two wires inside: one red and one green.  Now take a close look at the ridge between the two buckets. Inside this is a small cylindrical magnet that points towards the back wall. Inside the back wall there's a clever piece of electronics called a *reed switch*, pictured below.
+Si vous regardez la fin du cable RJ11 du côté du pluviomètre, vous pourrez aperçevoir seulement deux cables dedans: un vert et un rouge. Maintenant regardez la crête entre les deux seau. Dedans vous verrez un petit aimant cylindrique qui pointe vers la parroi arrière. Dans cette, il y a une pièce éléctronique intelligente appellé *commutateur à lames*, Photo ci-dessous.
 
 ![](images/reed_switch.jpg)
 
-The reed switch has two metal contacts inside it which will touch together when under the influence of a magnet. So electronically, this works in exactly the same way as a button connected to the Raspberry Pi. When the bucket tips, the magnet passes the reed switch, causing it to close momentarily.
+Le commutateur à lames à a l'interieur deux contacts métaliques qui se touchent quand ils sont sous l'influence d'un aimant. Alors éléctroniquement, cela fonction dans les même condition quand un bouton est connecté au Raspberry Pi. Quand le seau penche, l'aiment passe le commutateurs à lames, l'amenant à se fermer momentanément.
 
-The top of the back wall does come off if you want to see inside; just pull on the flat end gently and it should release. Inside there's a small circuit board that you can remove to examine. In the middle of it you will see the reed switch. Replace the circuit board and back wall lid before continuing.
+Le dessus de la parroi arrière se détache si vous voullez voir à l'intérieur, pour cela il suffis de tire délicatementr sur le bout plat. À l'interieur, il y a une petite planche de circuit que vous pouvez retirer pour l'examiner. Au millieu vous verrez le commutateur à lames. Remettez le circuit et le couvercle avant de continuer.
 
-## How does the sensor connect?
+## Comment faire pour connecter les capteurs ?
 
-1. To connect the rain gauge to the weather station board, you'll first need to have set up the main [weather station box](hardware-setup.md).
-1. Locate the socket on the weather station board marked **RAIN SENSOR** and the corresponding grommet.
-1. Unscrew the grommet from the case and thread the rain gauge plug through to the inside of the box:
+1. Pour connecter le pluviomètre à la station météo, vous allez tout d'abord avoir besoin d'intaller la boite de la [station météorologique] (hardware-setup.md).
+
+1. Localisez le socket sur la station météo marqué **Capteur de pluie** et le grommet correspondant.
+1. Dévissez l'œillet du boîtier et vissez le bouchon de jauge de pluie à travers à l'intérieur de la boîte :
 
   ![Connecting](images\Fix_Grommit.jpg)
 
-1. Connect the plug to the socket, and tighten up the grommet.
+1. Connectez la prise sur la carte, et serrez l'oeillet.
 
-When connected, the rain gauge uses **GPIO pin 6** (BCM).
+Une fois connecté, le pluviomètre utilise le **GPIO pin 6** (BCM).
 
-## Sample code
+## Enchantillon de code
 
-The following program uses a GPIO interrupt handler to detect input from the rain gauge and convert it to a meaningful measurement which is displayed on screen.
+Le programme suivant utilise le GPIO de gestion d'interuption pour détecter les données provenant du pluviomètre et les convertirs en mesures significatives qui sont affichées sur l'écran.
 
 ```python
   #!/usr/bin/python
