@@ -1,16 +1,19 @@
-# Anemometer
+# L'Anémomètre
 
+Voici l'anémomètre inclus dans le kit de station météo pour Raspberry Pi. Il est utilisé pour mesurer la vitesse du vent.
 This is the anemometer sensor supplied with the Raspberry Pi weather station kit. It's used to measure wind speed.
 
-![Anemometer](images/anemometer.png)
+![Anemomètre](images/anemometer.png)
 
-## How does it work?
+## Comment cela fonctionne ?
 
-The wind catches the three cups and drives them round, spinning the central section.
+LE went The wind catches the three cups and drives them round, spinning the central section.
 
-To help explain how the device works, you can dismantle it following these steps:
+Pour expliquer comment l'appareil fonctionne, vous pouvez le demonter avec les étapes suivantes: 
 
-1. First, hold the base in one hand and pull on the blades/cups with the other hand. You don't need to use much force. 
+1.Premièrement, tenez la base dans une main et tirer sur le  avec l'autre main. Vous n'avez pas besoin de forcer.
+
+First, hold the base in one hand and pull on the blades/cups with the other hand. You don't need to use much force. 
 
 1. Look at the underside of the blades/cups and you'll see a small metal cylinder on one side. This is a magnet, just like the one found on the bucket of the rain gauge. Test it with a paper clip if you like.
 
@@ -26,18 +29,18 @@ If we can detect the number of rotations in a given time period, we can calculat
 
 The following algorithm can be used to calculate wind speed:
 
-> For each time period **t**  
+> Pour chaque période de temps **t**  
 > --- **count** = recorded anemometer signals 
 > --- **rotations** = count / 2  
 > --- **distance** = rotations * 2 * pi * radius (9cm)  
-> --- **speed** = distance / t (**in cm/s**)  
+> --- **vitesse** = distance / t (**in cm/s**)  
 > 
-> To convert **speed** into **km/h**  
-> --- speed = speed / 100000 (**km/s**)  
-> --- speed = speed * 3600 (**km/h**)  
+> To convert **vitesse** into **km/h**  
+> --- vitesse = vitesse / 100000 (**km/s**)  
+> --- vitesse = vitesse * 3600 (**km/h**)  
 > 
 > To compensate for anemometer factor  
-> --- speed = speed * 1.18  
+> --- vitesse = vitesse * 1.18  
 
 ## How does the sensor connect?
 
@@ -51,9 +54,11 @@ To connect the anemometer to the weather station board, first you'll need to hav
 
 1. Connect the plug to the socket, and tighten up the grommet.
 
-When connected, the anemometer uses **GPIO pin 5** (BCM).
+Quand l'anémomètre est connecté, il utilise le **GPIO pin 5** (BCM).
 
-## Sample code
+## Quelques lignes de code ...
+
+LE programme suivant utiliser les ports GPIO pour detecter les entrées venant de l'anemomètre, et les convertis en données significatives qui sont par la suite affichées sur l'écran. 
 
 The following program uses a GPIO interrupt handler to detect input from the anemometer, and convert it into a meaningful measurement which is displayed on-screen.
 
