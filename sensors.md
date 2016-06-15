@@ -1,6 +1,6 @@
-# Weather Station Sensors
+#Les capteurs de la station météo
 
-- [Rain gauge](rain-gauge.md)
-- [Anemometer](anemometer.md)
-- [Wind vane](wind-vane.md)
-- [Temperature probe](temp-probe.md)
+- [Le pluviomètre](rain-gauge.md)
+- [L'Anémomètre](anemometer.md)
+- [La girouette](wind-vane.md)
+- [La sonde de température](temp-probe.md)
