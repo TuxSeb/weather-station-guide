@@ -1,5 +1,4 @@
 # Demonstration du site web pour la Station météo
-Weather station demo website
 
 Ce tutoriel va vous monter comment creer un site web simple, montrant les graphiques des données de la station météo Raspberry Pi.
 
