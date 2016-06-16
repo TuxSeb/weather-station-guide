@@ -1,5 +1,7 @@
-# Weather station demo website
+# Demonstration du site web pour la Station météo
+Weather station demo website
 
+Ce tutoriel va vous monter comment creer un site web simple, 
 This tutorial will show you how to create a simple website, showing graphs of the Raspberry Pi weather station data.
 
 ## Get the data logging code
