@@ -1,70 +1,67 @@
 # L'Anémomètre
 
 Voici l'anémomètre inclus dans le kit de station météo pour Raspberry Pi. Il est utilisé pour mesurer la vitesse du vent.
-This is the anemometer sensor supplied with the Raspberry Pi weather station kit. It's used to measure wind speed.
 
 ![Anemomètre](images/anemometer.png)
 
 ## Comment cela fonctionne ?
 
-LE went The wind catches the three cups and drives them round, spinning the central section.
+Le vent s'engouffre dans les 3 coupes et les font tournées autour.
 
 Pour expliquer comment l'appareil fonctionne, vous pouvez le demonter avec les étapes suivantes: 
 
 1.Premièrement, tenez la base dans une main et tirer sur le  avec l'autre main. Vous n'avez pas besoin de forcer.
 
-First, hold the base in one hand and pull on the blades/cups with the other hand. You don't need to use much force. 
-
-1. Look at the underside of the blades/cups and you'll see a small metal cylinder on one side. This is a magnet, just like the one found on the bucket of the rain gauge. Test it with a paper clip if you like.
+2.Regarder en dessous des coupes et vous verrez un petit cylindre métalliquee sur un coté. c'est un aimant, comme celui dans les seau du pluviomètre. Testez le avec un trombone si vous voulez.
 
 ![Anemometer Magnet](images/anemometer_magnet.png)
 
-1. Now use a screwdriver to remove the three screws on the bottom of the base. The base should then pop out easily. Slide it down the cable to get it out of the way. If you look inside you'll see our old friend the reed switch again.
+3.Maintenant utilisez un tournvevis pour enlever les trois vis de la base. La base devrait devrait apparaître facilement. Faites glisser le cable pour le sortir de la voie. Si vous regardez à l'interieur, vous verrez encore notre vieil ami, le commutateur à lames.   
 
 ![Anemometer Reed](images/anemometer_reed.png)
 
-So what does this mean? When the blades/cups are in their original position and spinning, the magnet will rotate in a tight circle above the reed switch. So for every complete rotation, there will be two moments when the switch is closed.
+## Que-ce que cela signifie ?
 
-If we can detect the number of rotations in a given time period, we can calculate the speed at which the arms are spinning. As some energy is lost in the pushing of the cups, an anemometer often under-reports the wind speed. To compensate for this, we will multiply our calculated speed by a factor of 1.18 (specific to this anemometer).
+Quand les coupes sont dans leurs positions originelle et tournet, l'aimant va tourner dans un cercle serré au desus du commutateur à lames. Pour chaque tour effecturé, il y aura deux moment où le switch est fermé.
 
-The following algorithm can be used to calculate wind speed:
+Si nous pouvons detecter le nombre de rotations dans un temps impartis, nous pouvons alors calculer la vitesse à laquelle le bras est en train de tourner. Comme un peu d'énergie est perdue quand il y a rotation, un anémomètre sous-estime souvent la vitesse du vent. Pour compenser, on multiplie la vitesse calculée par un facteur de 1.18 (specifique pour cet anémomètre).
+
+L'Algorithme suivant peut être utilisé pour calculer la vitesse du vent:
 
 > Pour chaque période de temps **t**  
-> --- **count** = recorded anemometer signals 
+> --- **count** = signal de l'anémomètre enregistré 
 > --- **rotations** = count / 2  
 > --- **distance** = rotations * 2 * pi * radius (9cm)  
 > --- **vitesse** = distance / t (**in cm/s**)  
 > 
-> To convert **vitesse** into **km/h**  
+> Pour convertir la vitesse **vitesse** en **km/h**  
 > --- vitesse = vitesse / 100000 (**km/s**)  
 > --- vitesse = vitesse * 3600 (**km/h**)  
 > 
-> To compensate for anemometer factor  
+>Pour compenser le facteur anémomètre : 
 > --- vitesse = vitesse * 1.18  
 
-## How does the sensor connect?
+## Comment connecter le capteur ? 
 
-To connect the anemometer to the weather station board, first you'll need to have set up the main [weather station box](hardware-setup.md).
+Pour connecter l'anémomètre à la station météo, vous devez tout d'abord installer la [Boite de la Station météo](hardware-setup.md).
 
-1. Locate the socket on the weather station board marked **WIND** and the corresponding grommet.
-1. The anemometer can be connected directly to the board, but ideally via the [wind vane](wind_vane.md).
-1. Unscrew the grommet from the case and thread the wind vane plug through to the inside of the box.
+1.Localisez l'emplacement sur la station météo marqué **WIND** and l'oeillet correspondant.
+2.L'anémomètre peut directement être connecté à la station, mais idéallement avec la [wind vane](wind_vane.md)
+3.Dévissez l'œillet du boîtier et vissez le bouchon de girouette à travers à l'intérieur de la boîte.
 
-  ![Connecting](images\Fix_Grommit.jpg)
+  ![Connecter](images\Fix_Grommit.jpg)
 
-1. Connect the plug to the socket, and tighten up the grommet.
+4.Connectez la prise au socket et resserez l'oeillet 
 
 Quand l'anémomètre est connecté, il utilise le **GPIO pin 5** (BCM).
 
 ## Quelques lignes de code ...
 
-LE programme suivant utiliser les ports GPIO pour detecter les entrées venant de l'anemomètre, et les convertis en données significatives qui sont par la suite affichées sur l'écran. 
-
-The following program uses a GPIO interrupt handler to detect input from the anemometer, and convert it into a meaningful measurement which is displayed on-screen.
+Le programme suivant utiliser les ports GPIO pour detecter les entrées venant de l'anemomètre, et les convertis en données significatives qui sont par la suite affichées sur l'écran. 
 
 ```python
 
-import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO 
 import time, math
 
 pin = 5
