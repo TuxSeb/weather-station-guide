@@ -1,24 +1,23 @@
 # Demonstration du site web pour la Station météo
 Weather station demo website
 
-Ce tutoriel va vous monter comment creer un site web simple, 
-This tutorial will show you how to create a simple website, showing graphs of the Raspberry Pi weather station data.
+Ce tutoriel va vous monter comment creer un site web simple, montrant les graphiques des données de la station météo Raspberry Pi.
 
-## Get the data logging code
+## Obtenez le code d'enregistrement
 
-1. You'll need root access on the Raspberry Pi. From the command line, type:
+1. Pour cela, il vous faut l'accès root sur le Raspberry Pi. Depuis le terminal, tapez: 
 
     `sudo -s`
 
-1. Navigate to the web folder:
+2. Navigez vers le dossier web
 
     `cd /var/www/html`
 
-1. Download the files to a folder named `demo`:
+3. Téléchargez les fichier dans un dossier nommé `demo`
 
     `git clone https://github.com/raspberrypi/weather-station-www.git demo`
   
-1. Download and unzip the [flot](http://www.flotcharts.org/) JavaScript plotting library:
+4. Téléchargez et décompressez la librairie JavaScript de traçage [flot](http://www.flotcharts.org/) 
 
     `cd demo/js`
 
@@ -27,49 +26,51 @@ This tutorial will show you how to create a simple website, showing graphs of th
     `unzip flot-0.8.3.zip`
 
 
-1. Return to the demo site root:
+1. Retournez sur le site de démonstration mère Return to the demo site root:
 
     `cd ..`
 
-You should now be in `/var/www/html/demo`.
+vous devriez maintenant être dans `/var/www/html/demo`
 
-## Set up and connect
+##Installer et connecter
   
-1. Update the the PHP script with the MySQL password that you chose when installing the database:
+1. Mettre à jour le script du PHP avec le mot de passe MySQL que vous avez choisi lors de l'installation de la base de données :
 
     `nano data.php`
   
-    Find the line: `$con=mysqli_connect("localhost","root","raspberry","weather");`
+   Trouvez la ligne: `$con=mysqli_connect("localhost","root","raspberry","weather");`
   
-    Update `raspberry` to the password that you chose.
+    Mettez a jour  `raspberry` vers un autre mot de passe que vous avez choisis.
   
-    Press `Ctrl O` then `Enter` to save, and `Ctrl X` to quit nano.
+    Appuyez sur `Ctrl O` puis `Enter` pour sauvegarder, et `Ctrl X` pour quitter nano.
   
-1. Repeat the previous step for `csv.php`.
+2. Repetez les instuction précédentes pour `csv.php`.
 
-1. Find the weather station's IP address:
-
-    `ifconfig`
+3. Trouvez l'adresse IP de la station météo
+ 
+     `ifconfig`
   
-  The IP address will be on the second line just after `inet addr:`.
+    L'adresse IP sera sur la seconde ligne juste après `inet addr:`.
+    The IP address will be on the second line just after `inet addr:`.
 
-Enter this IP address into a browser, followed by `/demo`. For example: `http://192.168.0.X/demo`.
+Entrez cette adresse IP dans un navigateur, suivis de `/demo`. Par exemple `http://192.168.0.X/demo`.
   
-  A page should load, showing various graphs. Note that wind direction is not shown.
-  
-  
-  You can drag the graph left or right with the left mouse button, or zoom in and out with the mouse wheel.
+  Une page devrait s'afficher, montrant différents graphiques. Notez qu'il n'y a pas la direction du vent. 
+  Vous pouvez faire glisser le graphique à gauche ou à droite avec le bouton gauche de la souris , ou un zoom avant et arrière avec la molette de la souris .
+ 
 
-## Downloading data
+## Télécharger les données
 
-If you prefer to work in Microsoft Office (or equivalent), the data can be extracted in CSV form and imported directly. Enter the weather station's IP address into the browser, followed by `/demo/csv.php`. For example: `http://192.168.0.X/demo/csv.php`. Your browser will offer you a CSV file download, which will contain a complete dump of all data in the MySQL database.
+Si vous preferez travavailler avec Micro$oft office (ou équivalent), les données peuvent être extraite dans un fichier CSV et importé directement.
+Entrez l'adresse IP de la station météo dans le navigateur, suivis de `/demo/csv.php`. Par exemple: `http://192.168.0.X/demo/csv.php`. Le navigateur va vous donner un fichier CSV à télécharger, qui contiendra une décharge complète de toutes les données dans la base de données MySQL.
 
-It's also possible to specify a date range to select records for inclusion in the CSV file. This is done by specifying a `from` and/or `to` date parameter on the query string.
+Il est également possible de spécifier une plage de dates pour sélectionner des enregistrements pour l'inclusion dans le fichier CSV . Cela se fait en spécifiant un ` from` et / ou paramèté la date de`to` sur la chaîne de requête .
 
-The date format is: `"YYYY-MM-DD HH:MM:SS"`. Time parameters must be enclosed in double quotes. For example:
+Le format de date est: `"AAAA-MM-JJ HH:MM:SS"`.Les paramètres de temps doivent être placés entre guillemets . Par exemple:
 
   - `http://192.168.0.X/demo/csv.php?from="2014-01-01"`
   - `http://192.168.0.X/demo/csv.php?to="2014-12-31 23:59:59"`
   - `http://192.168.0.X/demo/csv.php?from="2014-01-01"&to="2015-01-01 12:00:00"`
 
-  If you leave out the `from` and `to` parameters (as in the previous step), then it does a complete dump of all data in the MySQL database.
+  Si vous laissez le ` from` et `to` (comme dans l'étape précédente ) , alors il fait une décharge complète de toutes les données dans la base de données MySQL .
+ 
