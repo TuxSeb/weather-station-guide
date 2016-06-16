@@ -1,60 +1,71 @@
-# Using the weather station disk image
+#Utiliser le disque image pour la station météo
+Using the weather station disk image
 
+La manière la plus simple pour installer votre Station météo Raspberry Pi par Oracle est d'utiliser l'image pré-installée
 The easiest way to get your Raspberry Pi Oracle weather station up and running is to use the pre-built disk image.
 
-## Download and write the image to the SD card
+## Télécharger et écrire l'image sur une carte SD 
+Download and write the image to the SD card
 
-1.	[Download the disk image](http://downloads.raspberrypi.org/weather_station/images/weather_station-2016-03-24/WeatherStation.zip).
+1.	[Télécharger l'image disque](http://downloads.raspberrypi.org/weather_station/images/weather_station-2016-03-24/WeatherStation.zip).
 
-1.	Follow [the instructions](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) for writing it to the SD card that came with the weather station (or any other SD card that is at least 8Gb).
+1.	Suivez [Les instructions](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) pour l'écrire sur la carte SD qui est fournie avec la station météo (ou n'importe quelle carte SD qui a au minimum 8GB).
+2.	any other SD card that is at least 8Gb).
 
-1.	Put the SD card into the Raspberry Pi in your weather station and power it up.
+1. Inserez la carte SD dans le Raspberry Pi qui est connécté à la station météo et allumez le.
+Put the SD card into the Raspberry Pi in your weather station and power it up.
 
-## A bit of housekeeping
+## Un peu de ménage
 
+Le Pi va alors booter vers une invite de texte
 The Pi will boot to a text prompt:
 
-1. Login with `user` pi and password `raspberry`.
+1. Identifiez vous avec comme `user (utilisateur)` Pi et `raspberry` comme mot de passe.
 
-1. Run the configuration tool:
+1. Lancez l'outils de configuration:
+2. Run the configuration tool:
 
 `sudo raspi-config`
 
-1. Select option 1 `Expand Filesystem`.
+1. Sélectionnez l'option 1 `Expand Filesystem`.
 
-1. Select `Finish`.
+1. Puis sélectionnez `Finish`.
 
-1. Select `No` when asked to reboot.
+1. et enfin, sélectionnez `No` quand il est demandé de redemarrer.
 
-1. It's a good idea to **change your password** while you're here. Select option 2 `Change User Password`. This is the password you will need to log into your Raspberry Pi as user 'pi'.
+1. C'est une bonne idée de **changer votre mot de passe ** tant que vous êtes là. Séléctionnez l'option 2. C'est le mot de passe qui vous allez avoir besoin pour vous connecter dans votre Raspberry Pi comme utilisateur 'pi'.
+2. It's a good idea to **change your password** while you're here. Select option 2 `Change User Password`. This is the password you will need to log into your Raspberry Pi as user 'pi'.
 
 
-## Make the weather station run at boot and log data automatically
+## exécution au démarrage et vous connection automatique aux données
 
-1. Go to the WeatherStation folder:
+1. Allez dans le dossier Weatherstation via le terminal
 
     `cd WeatherStation` 
 
-1. Set up the scheduled (cron) job:
+1. Mettez en place le ( cron ) tâche planifiée
 
     `crontab WeatherStation.cron`  
 
-## Check that the time is correct
+## Vérifiez que le temps est correct
+Check that the time is correct
 
-1. Check date and time:
+1. Vérifiez la date et le temps
+2. Check date and time:
 
     `date`
 
-1. If the date is wrong, fix it:
+1. Si la date est mauvaise, corrigez-là:
+2. If the date is wrong, fix it:
 
      `sudo date -s 'yyy-mm-dd hhh:mm:ss'` 
 
-For example, to set the date and time to 24th March 2016 12:24:56, type the following:
+Par exemple, pour définir la date et le temps au 24 Mars 2016 12:24:56, tapez la commande suivante
 
      `sudo date -s '2016-03-24 12:34:56'`
 
   
-1. Finally, reboot
+1. Puis redemarrez
 
     `sudo reboot`
 
@@ -64,7 +75,8 @@ At this stage, you have a weather station that reads its sensors and stores the 
 
 Oracle has set up a central database to allow all schools in the Weather Station project to upload their data. It's safe there and you can download it in various formats, share it, and even create graphs and reports. Here's how to do it.
 
-## Register your school
+##  Enregistrez votre école
+Register your school
 
 Firstly, you'll need to [register your school](oracle.md) and add your weather station. Come back here when you have your weather station passcode.
 
@@ -111,25 +123,28 @@ Change **MyStation** and **MyPass** to your weather station name and passcode. M
  
 ## Check that it's working
 
-### Local database and logging
+### Base de données locale et enregistrement
 
-1. Log into the database [password: tiger]:
+1. 
+2. S'enregister dans la base de donnée [Mot de passe: tiger]:
 
     `mysql -u root -p weather` 
 
-1. Run the SQL command `SELECT CREATED, LEVEL, TEXT FROM LOG ORDER BY CREATED;`
+1. Utiliser la commande suivante `SELECT CREATED, LEVEL, TEXT FROM LOG ORDER BY CREATED;`
 
-1. Expected result: 
+1. Résultat attendu 
 
 ### Oracle remote database
 
-1. Log into your school's [Oracle database account](oracle.md).
+1. connectez-vous au [compte de la base de données Oracle](oracle.md) de votre école. 
 
-1. Go to 'Weather measurements'. You should see the station readings. The database logs every 10 minutes locally, and uploads to Oracle once per hour. If no readings are showing, check back a little later.
+2. Allez a "Mesures météorologiques. Vous devriez voir les lectures de la station. La base de données enregistre toutes les 10 minutes sur place , et les envoies à Oracle une fois par heure. Si aucune lecture est affichée, revenez un peu plus tard .
+
+3. Go to 'Weather measurements'. You should see the station readings. The database logs every 10 minutes locally, and uploads to Oracle once per hour. If no readings are showing, check back a little later.
 
 ![](images/weather-readings.png)
 
-
+Vous pouvez télécharger les données dans différents formats et aussi créer des graphiques en utilisant le menu:
 You can download your data in various formats and also make charts using the menu:
 
 ![](images/wsmenu.png)
