@@ -1,6 +1,6 @@
 # L'Anémomètre
 
-Voici l'anémomètre inclus dans le kit de station météo pour Raspberry Pi. Il est utilisé pour mesurer la vitesse du vent.
+Voici l'anémomètre inclu dans le kit de station météo pour Raspberry Pi. Il est utilisé pour mesurer la vitesse du vent.
 
 ![Anemomètre](images/anemometer.png)
 
@@ -22,7 +22,7 @@ Pour expliquer comment l'appareil fonctionne, vous pouvez le demonter avec les �
 
 ## Que-ce que cela signifie ?
 
-Quand les coupes sont dans leurs positions originelle et tournet, l'aimant va tourner dans un cercle serré au desus du commutateur à lames. Pour chaque tour effecturé, il y aura deux moment où le switch est fermé.
+Quand les coupes sont dans leurs positions originelles et tournent, l'aimant va tourner dans un cercle serré au desus du commutateur à lames. Pour chaque tour effectué, il y aura deux moment où le switch sera fermé.
 
 Si nous pouvons detecter le nombre de rotations dans un temps impartis, nous pouvons alors calculer la vitesse à laquelle le bras est en train de tourner. Comme un peu d'énergie est perdue quand il y a rotation, un anémomètre sous-estime souvent la vitesse du vent. Pour compenser, on multiplie la vitesse calculée par un facteur de 1.18 (specifique pour cet anémomètre).
 
